@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import StartGame from './../components/StartGame.vue'
-import MainGame from './../components/MainGame.vue'
+import MainScreen from './../components/MainScreen.vue'
+import InteractScreen from './../components/InteractScreen.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      component: StartGame,
+      component: MainScreen,
     },
     {
-      path: '/maingame',
-      component: MainGame,
+      path: '/interactScreen',
+      component: InteractScreen,
     },
   ]
 })

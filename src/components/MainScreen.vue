@@ -1,7 +1,10 @@
 <template>
-  <div class="main">
-    <div class="title padding-1">Pikachu</div>
-    <div class="select-item-title padding-1">Select mode to start game</div>
+  <div class="main mb-4">
+    <div class="hearder-main mb-4 flex justify-center flex-col items-center">
+      <div class="title leading-none">Pikachu</div>
+      <div class="select-item-title">Select mode to start game</div>
+    </div>
+
     <div class="item-choose padding-2">
       <div class="item" @click="OnClickPage(16)">4x4 <span>Easy</span></div>
       <div class="item" @click="OnClickPage(36)">6x6 <span>Normal</span></div>
@@ -12,11 +15,32 @@
 </template>
 
 <script>
+import { shuffle } from "./common/randomArr";
 export default {
+  data() {
+    return {
+      settings: {
+        totalBlocks: 0,
+        cardContext: [],
+      },
+    };
+  },
   methods: {
     OnClickPage(val) {
-      this.$emit("click-page", val);
-      this.$router.push("/maingame");
+      if (val) {
+        this.settings.totalBlocks = val;
+        const fisrtCard = Array.from(
+          { length: this.settings.totalBlocks / 2 },
+          (_, i) => i + 1
+        );
+        const secondCard = [...fisrtCard];
+        const fullCard = [...fisrtCard, ...secondCard];
+        this.settings.cardContext = shuffle(shuffle(fullCard));
+        this.$router.push({
+          path: "/interactScreen",
+          query: this.settings.cardContext,
+        });
+      }
     },
   },
 };
