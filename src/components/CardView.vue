@@ -2,8 +2,8 @@
   <div class="card" :class="{ isflipped: isFlipped }" @click="onToggleFlipCard()">
     <div class="card-face card__face--font p-2 bg-slate-700">
       <div class="card--content">
-        <div :style="{ backgroundImage: `url(@/assets/images/1.png)` }"></div>
-        <!-- <img src="@/assets/images/1.png" alt="" /> -->
+        <img :src="getImageUrl(imgBackFaceUrl)" />
+        <!-- <div :style="{ backgroundImage: `url('${imgBackFaceUrl}')` }"></div> -->
       </div>
     </div>
     <div class="card-back card__face--back p-2 bg-slate-700">
@@ -15,9 +15,9 @@
 <script>
 export default {
   props: {
-    card: {
-      type: Object,
-      // required: true,
+    imgBackFaceUrl: {
+      type: String,
+      required: true,
     },
   },
   data() {
@@ -28,6 +28,10 @@ export default {
   methods: {
     onToggleFlipCard() {
       this.isFlipped = !this.isFlipped;
+    },
+    getImageUrl(imgBackFaceUrl) {
+      const imgBackFace = `/src/assets/images/${imgBackFaceUrl}`;
+      return imgBackFace;
     },
   },
 };
@@ -45,9 +49,11 @@ export default {
   transform-style: preserve-3d;
   margin: 0 12px;
 }
+
 .card.isflipped {
   transform: rotateY(-180deg);
 }
+
 .card-face {
   position: absolute;
   width: 100%;
@@ -62,6 +68,7 @@ export default {
   color: var(--dark);
   text-align: center;
 }
+
 .card-back {
   position: absolute;
   width: 100%;
@@ -91,5 +98,13 @@ export default {
   background-size: 40px 40px;
   width: 100%;
   height: 100%;
+}
+
+.card__face--font {
+  background-size: container;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
 }
 </style>
