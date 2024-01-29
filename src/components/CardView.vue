@@ -1,9 +1,12 @@
 <template>
-  <div class="card" :class="{ isflipped: isFlipped }" @click="onToggleFlipCard()">
+  <div
+    class="card"
+    :class="{ isflipped: isFlipped, disabled: onDisableClick }"
+    @click="onToggleFlipCard()"
+  >
     <div class="card-face card__face--font p-2 bg-slate-700">
       <div class="card--content">
         <img :src="getImageUrl(imgBackFaceUrl)" />
-        <!-- <div :style="{ backgroundImage: `url('${imgBackFaceUrl}')` }"></div> -->
       </div>
     </div>
     <div class="card-back card__face--back p-2 bg-slate-700">
@@ -16,22 +19,40 @@
 export default {
   props: {
     imgBackFaceUrl: {
-      type: String,
+      type: [String, Number, Object, Array],
       required: true,
+    },
+    item: {
+      type: [String, Number, Object, Array],
+      required: true,
+    },
+    rules: {
+      type: Array,
     },
   },
   data() {
     return {
       isFlipped: false,
+      onDisableClick: false,
     };
   },
   methods: {
     onToggleFlipCard() {
+      if (this.onDisableClick) return;
       this.isFlipped = !this.isFlipped;
+      if (this.isFlipped) {
+        this.$emit("OnFlip", this.item);
+      }
+    },
+    closeFlipCard() {
+      this.isFlipped = false;
     },
     getImageUrl(imgBackFaceUrl) {
       const imgBackFace = `/src/assets/images/${imgBackFaceUrl}`;
       return imgBackFace;
+    },
+    handlerdontClicks() {
+      this.onDisableClick = true;
     },
   },
 };
@@ -49,7 +70,9 @@ export default {
   transform-style: preserve-3d;
   margin: 0 12px;
 }
-
+.card.disabled {
+  cursor: default;
+}
 .card.isflipped {
   transform: rotateY(-180deg);
 }

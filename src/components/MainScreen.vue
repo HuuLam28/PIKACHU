@@ -35,7 +35,7 @@ export default {
         );
         const secondCard = [...fisrtCard];
         const fullCard = [...fisrtCard, ...secondCard];
-        this.settings.cardContext = shuffle(shuffle(fullCard));
+        this.settings.cardContext = shuffle(shuffle(shuffle(shuffle(fullCard))));
         this.$router.push({
           path: "/interactScreen",
           query: this.settings.cardContext,
