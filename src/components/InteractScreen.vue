@@ -1,12 +1,15 @@
 <script>
 import CardView from "./CardView.vue";
+import { onBeforeUnmount, onMounted } from "vue";
 export default {
   components: {
     CardView,
   },
   created() {
     // Sử dụng $route.query để nhận dữ liệu từ URL
-    this.receivedData = this.$route.query;
+    console.log(this.$route.query);
+    this.receivedData = this.$route.query.cardContext;
+    this.startTime = this.$route.query.startTime;
   },
   methods: {
     checkRules(item) {
@@ -23,7 +26,11 @@ export default {
             documentsCardCheck &&
             documentsCardCheck.length === Object.keys(this.receivedData).length - 1
           ) {
-            alert("Win ");
+            this.timer = new Date().getTime() - this.startTime;
+            this.$router.push({
+              path: "/resultScreen",
+              query: "",
+            });
           }
         } else {
           setTimeout(() => {
@@ -35,11 +42,15 @@ export default {
       }
     },
     auto() {
-      console.log("auto");
       this.autoWin = true;
+      this.timer = (new Date().getTime() - this.startTime) / 1000;
+      console.log("this.timer: " + this.timer);
       setTimeout(() => {
-        alert("Win ");
-      }, 1000);
+        this.$router.push({
+          path: "/resultScreen",
+          query: this.timer,
+        });
+      }, 2000);
     },
   },
   data() {

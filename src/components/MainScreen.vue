@@ -36,9 +36,14 @@ export default {
         const secondCard = [...fisrtCard];
         const fullCard = [...fisrtCard, ...secondCard];
         this.settings.cardContext = shuffle(shuffle(shuffle(shuffle(fullCard))));
+        this.settings.startedAt = new Date().getTime();
+        console.log(this.settings.startedAt);
         this.$router.push({
           path: "/interactScreen",
-          query: this.settings.cardContext,
+          query: {
+            startTime: this.settings.startedAt,
+            cardContext: this.settings.cardContext,
+          },
         });
       }
     },
