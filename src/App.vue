@@ -4,7 +4,7 @@ import CoppyRight from "./components/CoppyRight.vue";
 </script>
 
 <template>
-  <div class="center">
+  <div class="center bg-slate-300">
     <RouterView />
     <CoppyRight />
   </div>
@@ -12,12 +12,11 @@ import CoppyRight from "./components/CoppyRight.vue";
 
 <style scoped>
 .center {
-  margin: 20% 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  width: 100%;
   flex-direction: column;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="screen">
     <h1>✨ Congratulations ✨</h1>
-    <h3>{{ Math.round(this.playToTime1 / 960) }} seconds</h3>
+    <h3>{{ this.playToTime1 }} seconds</h3>
     <button @click="onStartAgain">Start Again</button>
   </div>
 </template>
@@ -16,11 +16,9 @@ export default {
   //     default: 0,
   //   },
   // },
-  mounted() {
-    //console.log("aaa", this.$store.state.timer);
-  },
+  mounted() {},
   created() {
-    this.playToTime1 = this.$route.query.startTime;
+    this.playToTime1 = this.$route.query.timer;
   },
   methods: {
     onStartAgain() {

@@ -4,7 +4,7 @@
 <style scoped>
 .footer {
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
 }
 a {
   text-decoration: none;

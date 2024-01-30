@@ -61,8 +61,8 @@ export default {
 <style scoped>
 .card {
   display: inline-block;
-  width: 100px;
-  height: 120px;
+  /* width: 100px;
+  height: 120px; */
   text-align: center;
   cursor: pointer;
   position: relative;
@@ -87,7 +87,7 @@ export default {
   height: 120px;
   background-color: var(--light);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   color: var(--dark);
   text-align: center;
 }
@@ -102,7 +102,7 @@ export default {
   height: 120px;
   background-color: var(--dark);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   color: var(--light);
   text-align: center;
 }

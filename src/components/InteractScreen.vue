@@ -9,11 +9,12 @@ export default {
     return {
       autoWin: false,
       rules: [],
+      height: 120,
+      width: 100,
     };
   },
   created() {
     // Sử dụng $route.query để nhận dữ liệu từ URL
-    console.log(this.$route.query);
     this.receivedData = this.$route.query.cardContext;
     this.startTime = this.$route.query.startTime;
   },
@@ -53,14 +54,12 @@ export default {
     },
     auto() {
       this.autoWin = true;
-      console.log("this.startTime: " + this.startTime);
       this.timer = (new Date().getTime() - this.startTime) / 1000;
-      console.log("this.timer: " + this.timer);
       setTimeout(() => {
         this.$router.push({
           path: "/resultScreen",
           query: {
-            startTime: this.timer,
+            timer: this.timer,
           },
         });
       }, 2000);
@@ -79,6 +78,7 @@ export default {
       :imgBackFaceUrl="`${item}.png`"
       @OnFlip="checkRules"
       :class="{ isflipped: autoWin }"
+      :style="{ height: `${height}` + 'px', width: `${width}` + 'px' }"
     />
   </div>
   <button @click="auto()" class="bg-orange-200 rounded p-2">CLICK AUTO WIN</button>
