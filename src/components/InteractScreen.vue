@@ -5,6 +5,12 @@ export default {
   components: {
     CardView,
   },
+  data() {
+    return {
+      autoWin: false,
+      rules: [],
+    };
+  },
   created() {
     // Sử dụng $route.query để nhận dữ liệu từ URL
     console.log(this.$route.query);
@@ -26,11 +32,15 @@ export default {
             documentsCardCheck &&
             documentsCardCheck.length === Object.keys(this.receivedData).length - 1
           ) {
-            this.timer = new Date().getTime() - this.startTime;
-            this.$router.push({
-              path: "/resultScreen",
-              query: "",
-            });
+            setTimeout(() => {
+              this.timer = new Date().getTime() - this.startTime;
+              this.$router.push({
+                path: "/resultScreen",
+                query: {
+                  startTime: this.timer,
+                },
+              });
+            }, 1000);
           }
         } else {
           setTimeout(() => {
@@ -43,21 +53,18 @@ export default {
     },
     auto() {
       this.autoWin = true;
+      console.log("this.startTime: " + this.startTime);
       this.timer = (new Date().getTime() - this.startTime) / 1000;
       console.log("this.timer: " + this.timer);
       setTimeout(() => {
         this.$router.push({
           path: "/resultScreen",
-          query: this.timer,
+          query: {
+            startTime: this.timer,
+          },
         });
       }, 2000);
     },
-  },
-  data() {
-    return {
-      autoWin: false,
-      rules: [],
-    };
   },
 };
 </script>
