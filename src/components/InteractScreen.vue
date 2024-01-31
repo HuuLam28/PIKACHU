@@ -11,6 +11,8 @@ export default {
       rules: [],
       height: 120,
       width: 100,
+      onCard: false,
+      isFlippingAllowed: true,
     };
   },
   created() {
@@ -21,11 +23,13 @@ export default {
   methods: {
     checkRules(item) {
       this.rules.push(item);
-      if (this.rules.length === 1) return false;
-      else if (this.rules.length === 2) {
+
+      if (this.rules.length === 2) {
+        // Xử lý khi có 2 thẻ được chọn
         if (this.rules[0].value === this.rules[1].value) {
           this.$refs[`item-${this.rules[0].index}`][0].handlerdontClicks();
           this.$refs[`item-${this.rules[1].index}`][0].handlerdontClicks();
+
           this.rules = [];
           const documentsCardCheck = document.querySelectorAll(".screen .isflipped");
 
@@ -41,17 +45,39 @@ export default {
                   startTime: this.timer,
                 },
               });
-            }, 1000);
+            }, 700);
           }
         } else {
+          // console.log("Failed to 2 rules", this.rules.length);
+          // const index3 = this.rules[2];
+          // console.log("3", index3);
+
           setTimeout(() => {
             this.$refs[`item-${this.rules[0].index}`][0].closeFlipCard();
             this.$refs[`item-${this.rules[1].index}`][0].closeFlipCard();
+
             this.rules = [];
-          }, 1000);
+          }, 700);
         }
+      } else if (this.rules.length > 2) {
+        const index3 = this.rules[2];
+
+        // Xử lý khi có hơn 2 thẻ được chọn
+        setTimeout(() => {
+          for (let i = 0; i < this.rules.length; i++) {
+            this.$refs[`item-${this.rules[i].index}`][0].closeFlipCard();
+          }
+          this.rules = [];
+          this.rules.push(index3);
+        }, 700);
+      } else {
+        // Xử lý khi có ít hơn 2 thẻ được chọn
+        setTimeout(() => {
+          console.log("Failed to one more");
+        }, 700);
       }
     },
+
     auto() {
       this.autoWin = true;
       this.timer = (new Date().getTime() - this.startTime) / 1000;

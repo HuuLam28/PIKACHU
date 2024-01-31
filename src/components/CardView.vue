@@ -61,8 +61,6 @@ export default {
 <style scoped>
 .card {
   display: inline-block;
-  /* width: 100px;
-  height: 120px; */
   text-align: center;
   cursor: pointer;
   position: relative;

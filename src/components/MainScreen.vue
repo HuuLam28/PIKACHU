@@ -5,7 +5,7 @@
       <div class="select-item-title">Select mode to start game</div>
     </div>
 
-    <div class="item-choose padding-2">
+    <div class="item-choose">
       <div class="item text-white" @click="OnClickPage(16)">4x4 <span>Easy</span></div>
       <div class="item text-green-300" @click="OnClickPage(36)">
         6x6 <span>Normal</span>
