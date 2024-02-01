@@ -19,6 +19,6 @@ const router = createRouter({
       component: resultScreen,
     },
   ]
-})
+});
 
 export default router
