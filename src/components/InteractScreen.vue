@@ -1,6 +1,6 @@
 <script>
 import CardView from "./CardView.vue";
-import { onBeforeUnmount, onMounted } from "vue";
+
 export default {
   components: {
     CardView,
@@ -15,10 +15,12 @@ export default {
       isFlippingAllowed: true,
     };
   },
+
   created() {
     // Sử dụng $route.query để nhận dữ liệu từ URL
-    this.receivedData = this.$route.query.cardContext;
-    this.startTime = this.$route.query.startTime;
+    //this.receivedData = this.$route.query.cardContext;
+    this.startTime = this.$store.state.startTime;
+    this.receivedData = this.$store.state.cardSize;
   },
   methods: {
     checkRules(item) {
@@ -39,11 +41,12 @@ export default {
           ) {
             setTimeout(() => {
               this.timer = new Date().getTime() - this.startTime;
+              this.$store.dispatch("getSetTime", this.timer);
               this.$router.push({
                 path: "/resultScreen",
-                query: {
-                  startTime: this.timer,
-                },
+                // query: {
+                //   startTime: this.timer,
+                // },
               });
             }, 700);
           }
@@ -82,11 +85,12 @@ export default {
       this.autoWin = true;
       this.timer = (new Date().getTime() - this.startTime) / 1000;
       setTimeout(() => {
+        this.$store.dispatch("getSetTime", this.timer);
         this.$router.push({
           path: "/resultScreen",
-          query: {
-            timer: this.timer,
-          },
+          // query: {
+          //   timer: this.timer,
+          // },
         });
       }, 2000);
     },

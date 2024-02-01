@@ -18,7 +18,8 @@ export default {
   // },
   mounted() {},
   created() {
-    this.playToTime1 = this.$route.query.timer;
+    //this.playToTime1 = this.$route.query.timer;
+    this.playToTime1 = this.$store.state.timer;
   },
   methods: {
     onStartAgain() {

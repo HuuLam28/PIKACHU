@@ -43,12 +43,14 @@ export default {
         const fullCard = [...fisrtCard, ...secondCard];
         this.settings.cardContext = shuffle(shuffle(shuffle(shuffle(fullCard))));
         this.settings.startedAt = new Date().getTime();
+        this.$store.dispatch("getCardSize", this.settings.cardContext);
+        this.$store.dispatch("getStartTimer", this.settings.startedAt);
         this.$router.push({
           path: "/interactScreen",
-          query: {
-            startTime: this.settings.startedAt,
-            cardContext: this.settings.cardContext,
-          },
+          // query: {
+          //   startTime: this.settings.startedAt,
+          //   cardContext: this.settings.cardContext,
+          // },
         });
       }
     },
