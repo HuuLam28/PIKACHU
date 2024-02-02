@@ -4,13 +4,19 @@
     :class="{ isflipped: isFlipped, disabled: onDisableClick }"
     @click="onToggleFlipCard()"
   >
-    <div class="card-face card__face--font p-2 bg-slate-700">
+    <div
+      class="card-face card__face--font p-2 bg-slate-700 flex justify-center items-center"
+    >
       <div class="card--content">
         <img :src="getImageUrl(imgBackFaceUrl)" />
       </div>
     </div>
-    <div class="card-back card__face--back p-2 bg-slate-700">
-      <div class="card--content"></div>
+    <div
+      class="card-back card__face--back p-2 bg-slate-700 flex justify-center items-center"
+    >
+      <div class="card--content w-1/2">
+        <img :src="getImageUrlFace(imgFaceUrl)" alt="" />
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +25,10 @@
 export default {
   props: {
     imgBackFaceUrl: {
+      type: [String, Number, Object, Array],
+      required: true,
+    },
+    imgFaceUrl: {
       type: [String, Number, Object, Array],
       required: true,
     },
@@ -49,6 +59,10 @@ export default {
     },
     getImageUrl(imgBackFaceUrl) {
       const imgBackFace = `/src/assets/images/${imgBackFaceUrl}`;
+      return imgBackFace;
+    },
+    getImageUrlFace(imgFaceUrl) {
+      const imgBackFace = `/src/assets/images/${imgFaceUrl}`;
       return imgBackFace;
     },
     handlerdontClicks() {
@@ -114,7 +128,7 @@ export default {
 
 .card-back {
   transform: rotateY(0deg);
-  background: url("./../assets/images/icon_back.png") no-repeat center center;
+  /* background: url("./../assets/images/icon_back.png") no-repeat center center; */
   background-color: var(--dark);
   background-size: 40px 40px;
   width: 100%;

@@ -9,13 +9,6 @@
 
 <script>
 export default {
-  // props: {
-  //   timer: {
-  //     type: Number,
-  //     required: true,
-  //     default: 0,
-  //   },
-  // },
   mounted() {},
   created() {
     //this.playToTime1 = this.$route.query.timer;

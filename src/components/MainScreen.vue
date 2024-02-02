@@ -68,6 +68,7 @@ export default {
 }
 .title {
   font-size: 40px;
+  color: #ec7709;
 }
 .item-choose {
   display: flex;
@@ -87,5 +88,9 @@ export default {
   cursor: pointer;
   flex-direction: column;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+.select-item-title {
+  font-size: 16px;
+  color: rgb(78, 153, 2);
 }
 </style>

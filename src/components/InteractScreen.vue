@@ -1,3 +1,25 @@
+<template>
+  <div class="screen w-full h-full px-10">
+    <CardView
+      v-for="(item, index) in receivedData"
+      :key="index"
+      :ref="`item-${index}`"
+      :item="{ index, value: item }"
+      :imgBackFaceUrl="`${item}.png`"
+      :imgFaceUrl="`icon_back.png`"
+      @OnFlip="checkRules"
+      :class="{ isflipped: autoWin }"
+      :style="{
+        height: `${(700 - 16 * 4) / Math.sqrt(receivedData.length) - 16}px`,
+        width: `${(((700 - 16 * 4) / Math.sqrt(receivedData.length) - 16) * 3) / 4}px`,
+      }"
+    />
+  </div>
+  <button @click="auto()" class="bg-orange-200 rounded p-2 text-xs">
+    CLICK AUTO WIN
+  </button>
+</template>
+
 <script>
 import CardView from "./CardView.vue";
 
@@ -21,6 +43,9 @@ export default {
     //this.receivedData = this.$route.query.cardContext;
     this.startTime = this.$store.state.startTime;
     this.receivedData = this.$store.state.cardSize;
+    if (this.startTime === 0) {
+      this.$router.push("/");
+    }
   },
   methods: {
     checkRules(item) {
@@ -98,23 +123,12 @@ export default {
 };
 </script>
 
-<template>
-  <div class="screen mb-14">
-    <CardView
-      v-for="(item, index) in receivedData"
-      :key="index"
-      :ref="`item-${index}`"
-      :item="{ index, value: item }"
-      :imgBackFaceUrl="`${item}.png`"
-      @OnFlip="checkRules"
-      :class="{ isflipped: autoWin }"
-      :style="{ height: `${height}` + 'px', width: `${width}` + 'px' }"
-    />
-  </div>
-  <button @click="auto()" class="bg-orange-200 rounded p-2">CLICK AUTO WIN</button>
-</template>
 <style>
 .screen {
-  width: 50%;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 </style>
